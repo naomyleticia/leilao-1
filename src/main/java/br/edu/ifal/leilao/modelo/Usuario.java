@@ -5,6 +5,7 @@ public class Usuario {
 	private String email;
 	
 	public Usuario(String nome) {
+		super();
 		this.nome = nome;
 	}
 

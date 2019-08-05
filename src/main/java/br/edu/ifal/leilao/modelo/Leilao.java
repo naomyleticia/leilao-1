@@ -4,18 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Leilao {
-	private List<Lance> Lances = new ArrayList<Lance>();
+	private List<Lance> lances; 
 	
 	public Leilao() {
-		
+		super();
+		this.lances = new ArrayList<Lance>();
 	}
 
 	public List<Lance> getLances() {
-		return Lances;
+		return lances;
 	}
 
 	public void setLances(List<Lance> lances) {
-		Lances = lances;
+		this.lances = lances;
+	}
+	
+	public void propoe(Lance lance) {
+		lances.add(lance);
 	}
 	
 }

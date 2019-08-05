@@ -5,6 +5,7 @@ public class Produto {
 	private String descricao;
 	
 	public Produto(String nome) {
+		super();
 		this.nome = nome;
 	}
 

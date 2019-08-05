@@ -5,6 +5,7 @@ public class Lance {
 	private double valor;
 	
 	public Lance(Usuario usuario, double valor) {
+		super();
 		this.usuario = usuario;
 		this.valor = valor;
 	}
