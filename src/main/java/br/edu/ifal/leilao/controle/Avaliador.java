@@ -33,7 +33,7 @@ public class Avaliador {
 				return 0;
 			}
 		});
-		if(top3MarioresLances.size() > 3) 
+		//if(top3MarioresLances.size() > 3)
 			top3MarioresLances = top3MarioresLances.subList(0, 3);
 	}
 	
