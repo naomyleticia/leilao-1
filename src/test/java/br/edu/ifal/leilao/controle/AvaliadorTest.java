@@ -7,8 +7,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.edu.ifal.leilao.construtor.CriadorDeLeilao;
+import br.edu.ifal.leilao.construtor.CriadorDeUsuario;
 import br.edu.ifal.leilao.modelo.Lance;
 import br.edu.ifal.leilao.modelo.Leilao;
+import br.edu.ifal.leilao.modelo.Produto;
 import br.edu.ifal.leilao.modelo.Usuario;
 
 public class AvaliadorTest {
@@ -19,14 +22,17 @@ public class AvaliadorTest {
 	private Usuario quartoUsuario;
 	private Leilao leilao;
 	private Avaliador avaliador;
+	private CriadorDeLeilao criadorDeLeilao;
+	private CriadorDeUsuario criadorDeUsuario;
 	
 	@Before
 	public void inicializacao(){
-		primeiroUsuario = new Usuario("Bruno");
-		segundoUsuario = new Usuario("Maria");
-		terceiroUsuario = new Usuario("Jorge");
-		quartoUsuario = new Usuario("João");
-		leilao = new Leilao();
+		criadorDeUsuario = new CriadorDeUsuario();
+		primeiroUsuario = criadorDeUsuario.com("Bruno", "Bruno@gmail.com").constroi();
+		segundoUsuario = criadorDeUsuario.com("Maria", "Maria@gmail.com").constroi();
+		terceiroUsuario = criadorDeUsuario.com("Joao", "Joao@gmail.com").constroi();
+		quartoUsuario = criadorDeUsuario.com("Jose", "Jose@gmail.com").constroi();
+		criadorDeLeilao = new CriadorDeLeilao();
 		avaliador = new Avaliador();
 	}
 	
@@ -37,11 +43,13 @@ public class AvaliadorTest {
 		double valorSegundoLance = 400;
 		double valorTerceiroLance = 250;
 		
-		leilao.propoe(new Lance(primeiroUsuario, valorPrimeiroLance));
-		leilao.propoe(new Lance(segundoUsuario, valorSegundoLance));
-		leilao.propoe(new Lance(terceiroUsuario, valorTerceiroLance));
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos"))
+				.lance(primeiroUsuario, valorPrimeiroLance)
+				.lance(segundoUsuario, valorSegundoLance)
+				.lance(terceiroUsuario, valorTerceiroLance).constroi();
 		
 		avaliador.avaliar(leilao);
+		
 		double maiorLance = avaliador.getMaiorLance();
 		double maiorLanceEsperado = 400;
 		
@@ -58,10 +66,11 @@ public class AvaliadorTest {
 		double valorPrimeiroLance = 250;
 		double valorSegundoLance = 300;
 		double valorTerceiroLance = 400;
-
-		leilao.propoe(new Lance(primeiroUsuario, valorPrimeiroLance));
-		leilao.propoe(new Lance(segundoUsuario, valorSegundoLance));
-		leilao.propoe(new Lance(terceiroUsuario, valorTerceiroLance));
+		
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos"))
+				.lance(primeiroUsuario, valorPrimeiroLance)
+				.lance(segundoUsuario, valorSegundoLance)
+				.lance(terceiroUsuario, valorTerceiroLance).constroi();
 
 		avaliador.avaliar(leilao);
 		double maiorLance = avaliador.getMaiorLance();
@@ -80,10 +89,11 @@ public class AvaliadorTest {
 		double valorPrimeiroLance = 400;
 		double valorSegundoLance = 300;
 		double valorTerceiroLance = 250;
-
-		leilao.propoe(new Lance(primeiroUsuario, valorPrimeiroLance));
-		leilao.propoe(new Lance(segundoUsuario, valorSegundoLance));
-		leilao.propoe(new Lance(terceiroUsuario, valorTerceiroLance));
+		
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos"))
+				.lance(primeiroUsuario, valorPrimeiroLance)
+				.lance(segundoUsuario, valorSegundoLance)
+				.lance(terceiroUsuario, valorTerceiroLance).constroi();
 
 		avaliador.avaliar(leilao);
 		double maiorLance = avaliador.getMaiorLance();
@@ -102,10 +112,11 @@ public class AvaliadorTest {
 		double valorPrimeiroLance = 300;
 		double valorSegundoLance = 400;
 		double valorTerceiroLance = 250;
-
-		leilao.propoe(new Lance(primeiroUsuario, valorPrimeiroLance));
-		leilao.propoe(new Lance(segundoUsuario, valorSegundoLance));
-		leilao.propoe(new Lance(terceiroUsuario, valorTerceiroLance));
+		
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos"))
+				.lance(primeiroUsuario, valorPrimeiroLance)
+				.lance(segundoUsuario, valorSegundoLance)
+				.lance(terceiroUsuario, valorTerceiroLance).constroi();
 		
 		avaliador.setTop3Lances(leilao);
 		
@@ -134,10 +145,11 @@ public class AvaliadorTest {
 		double valorPrimeiroLance = 250;
 		double valorSegundoLance = 300;
 		double valorTerceiroLance = 400;
-
-		leilao.propoe(new Lance(primeiroUsuario, valorPrimeiroLance));
-		leilao.propoe(new Lance(segundoUsuario, valorSegundoLance));
-		leilao.propoe(new Lance(terceiroUsuario, valorTerceiroLance));
+		
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos"))
+				.lance(primeiroUsuario, valorPrimeiroLance)
+				.lance(segundoUsuario, valorSegundoLance)
+				.lance(terceiroUsuario, valorTerceiroLance).constroi();
 
 		avaliador.setTop3Lances(leilao);
 		
@@ -165,10 +177,12 @@ public class AvaliadorTest {
 		double valorPrimeiroLance = 400;
 		double valorSegundoLance = 300;
 		double valorTerceiroLance = 250;
+		
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos"))
+				.lance(primeiroUsuario, valorPrimeiroLance)
+				.lance(segundoUsuario, valorSegundoLance)
+				.lance(terceiroUsuario, valorTerceiroLance).constroi();
 
-		leilao.propoe(new Lance(primeiroUsuario, valorPrimeiroLance));
-		leilao.propoe(new Lance(segundoUsuario, valorSegundoLance));
-		leilao.propoe(new Lance(terceiroUsuario, valorTerceiroLance));
 
 		avaliador.setTop3Lances(leilao);
 		
@@ -196,10 +210,11 @@ public class AvaliadorTest {
 		double valorPrimeiroLance = 250;
 		double valorSegundoLance = 250;
 		double valorTerceiroLance = 250;
-
-		leilao.propoe(new Lance(primeiroUsuario, valorPrimeiroLance));
-		leilao.propoe(new Lance(segundoUsuario, valorSegundoLance));
-		leilao.propoe(new Lance(terceiroUsuario, valorTerceiroLance));
+		
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos"))
+				.lance(primeiroUsuario, valorPrimeiroLance)
+				.lance(segundoUsuario, valorSegundoLance)
+				.lance(terceiroUsuario, valorTerceiroLance).constroi();
 
 		avaliador.setTop3Lances(leilao);
 		
@@ -226,8 +241,10 @@ public class AvaliadorTest {
 	public void top3DeveFuncionarCom1Lance() {
 
 		double valorPrimeiroLance = 250;
-
-		leilao.propoe(new Lance(primeiroUsuario, valorPrimeiroLance));
+		
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos"))
+				.lance(primeiroUsuario, valorPrimeiroLance)
+				.constroi();
 
 		avaliador.setTop3Lances(leilao);
 		
@@ -249,9 +266,11 @@ public class AvaliadorTest {
 
 		double valorPrimeiroLance = 250;
 		double valorSegundoLance = 400;
-
-		leilao.propoe(new Lance(primeiroUsuario, valorPrimeiroLance));
-		leilao.propoe(new Lance(segundoUsuario, valorSegundoLance));
+		
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos"))
+				.lance(primeiroUsuario, valorPrimeiroLance)
+				.lance(segundoUsuario, valorSegundoLance)
+				.constroi();
 		
 		avaliador.setTop3Lances(leilao);
 		
@@ -273,6 +292,8 @@ public class AvaliadorTest {
 	
 	@Test
 	public void top3DeveFuncionarSemNenhumLance() {
+		
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos")).constroi();
 
 		avaliador.setTop3Lances(leilao);
 		
@@ -293,11 +314,12 @@ public class AvaliadorTest {
 		double valorSegundoLance = 300;
 		double valorTerceiroLance = 250;
 		double valorQuartoLance = 500;
-
-		leilao.propoe(new Lance(primeiroUsuario, valorPrimeiroLance));
-		leilao.propoe(new Lance(segundoUsuario, valorSegundoLance));
-		leilao.propoe(new Lance(terceiroUsuario, valorTerceiroLance));
-		leilao.propoe(new Lance(quartoUsuario, valorQuartoLance));
+		
+		leilao = criadorDeLeilao.para(new Produto("Wacom Intuos"))
+				.lance(primeiroUsuario, valorPrimeiroLance)
+				.lance(segundoUsuario, valorSegundoLance)
+				.lance(terceiroUsuario, valorTerceiroLance)
+				.lance(quartoUsuario, valorQuartoLance).constroi();
 		
 		avaliador.setTop3Lances(leilao);
 		
